@@ -1,0 +1,119 @@
+\chapter{连通性}
+
+\section{导论}
+在一些case中，percolation渗流并不是充分的，因为它仅仅保证无穷数量的节点在图或网络的某个地方连通。
+事实上，连通节点的比例可能非常小；很容易会出现：大部分的节点和the infinite component不连通。
+连通性是一个更加严格的条件；它要求所有节点都连接almost surely。
+
+因为连通性参数，例如圆盘的半径，经常是无穷的（对于无穷图），我们首先聚焦在infinite graph，
+比方说一个面积为$n$的方形区域，接着研究图在$n\rightarrow \infty$的连通性行为。
+
+我们首先讨论的是随机梯格的连通性
+
+\subsection{随机梯格的连通性}
+我们也考虑网格$\mathbb{L}^2$上一个大小为$n\times n$个顶点的盒子$B(x)$。
+正如bond percolation中的那样，每一条边以概率$p$发生。我们想要找到
+$p$要满足什么条件，使得$B(n)$的所有顶点是联通的，在$n\rightarrow\infty$的渐进情况下。
+我们建立了$\mathbb{L}^2$上bond percolation的临界概率$p_c=1/2$。
+会议$\theta(p)$指代原点$o$属于the infinite component的概率。
+
+如果$p>1/2$，在网格上存在一个唯一的infinite component，$B(n)$的每一个顶点以概率$\theta(p)$连接上它。
+因此在$B(n)$存在一个component具备mean size$n^2\theta(p)$。
+事实上，可以得到，在极限$n\rightarrow \infty$下，$\theta(p)$正好是
+$B(n)$中连通节点的比例。
+
+因此，对于full connectivity，必须$p\rightarrow 1$.问题是在$n$增长时，大概要多大的n就基本满足。
+让$p$是$n$的函数，平均孤立节点数量的渐进是
+\begin{equation*}
+    \mathbb{E} N_{\text {isol }}(n) \sim n^2(1-p(n))^4, \quad n \rightarrow \infty
+\end{equation*}
+
+因为每个（内部的）节点是以概率$(1-p(n))^4$孤立的。边界节点是渐进可忽略的，因为他们的数量是
+$\Theta(n) $.选择
+\begin{equation*}
+    p(n)=1-\frac{c(n)}{\sqrt{n}}
+\end{equation*}
+
+导致$\mathbb{E}N_{isol}(n)\sim c(n)^4$。所以对于连通性$c(n)\rightarrow 0$是必须的。
+下面的定理给了一个更清晰的结果。
+
+\begin{theorem}
+    (随机梯格中的孤立节点) 让$\mathbb{E}N_{isol}(n)$是$B(n)$中孤立节点的数量。那么$\mathbb{E}N_{isol}(n)$收敛到
+    一个均值为$M$的泊松随机变量，当且仅当
+    \begin{equation*}
+        n^2(1-p(n))^4 \rightarrow M, \quad n \rightarrow \infty
+    \end{equation*}
+\end{theorem}
+
+\begin{proof}
+    我们使用所谓的Chen-Stein方法来展示孤立节点的数量在给定条件下收敛到一个泊松分布。
+    我们要应用的特定结果如下
+\end{proof}
+
+\begin{lemma}
+    (总共variaiton distance的Chen-Stein界) 让$(A_i),i\in [n]$是
+    指示随机变量的collection。让$S=\Sigma_{i=1}^n A_i$,其中$\mathbb{E}A_i=p_i$，以及
+    \begin{equation*}
+        M \triangleq \sum_{i=1}^n p_i
+    \end{equation*}
+    
+    在$M<\infty$的假设下。因此$\mathbb{E}S=M$。那么，如果$A_i$是随机变量$(X_k)$的增函数
+    \begin{equation*}
+        \|S-\operatorname{Poi}(M)\|_{\mathrm{TV}} \leq \frac{1-\mathrm{e}^{-M}}{M}\left(\operatorname{var} S-M+2 \sum_{i=1}^n p_i^2\right)
+    \end{equation*}
+    其中$\operatorname{Poi}(M)$是均值为$M$的泊松随机变量，
+    $\|\cdot\|_{\mathrm{TV}}$是total variation distance,定义是
+    \begin{equation*}
+        \|P-Q\|_{\mathrm{TV}} \triangleq \sup \{Y \in \mathcal{F}:|\mathbb{P}(Q \in Y)-\mathbb{P}(P \in Y)|\}
+    \end{equation*}
+
+    对2个随机变量$P$和$Q$定义相同的概率空间with $\sigma$- algebra $\mathcal{F}$
+\end{lemma}
+
+在我们的情况中，潜在的独立随机变量$(X_k)$是
+
+
+todo todo 
+todo todo
+todo todo
+todo todo
+
+
+\section*{练习题}
+
+\begin{exercise}
+    不使用本章的任何结果，说明：对于圆盘图，
+    \begin{equation*}
+        \pi r^2(n)=5\pi \log n
+    \end{equation*}
+    是a.a.s. connectivity的充分条件。
+
+    提示，面积为$n$的方形区域的分拆为一些面积为$\sqrt{\log n}$的方形区域。
+    在每个方形上定义一个事件，说明所有事件发生的概率趋于1，在$n\rightarrow \infty$的条件下。
+    接着证明这个联合事件表明：在给定的$r(n)$的条件下，可以得到连通性。
+\end{exercise}
+
+\begin{exercise}
+    估计在定理12.8的下界的讨论中，"likely scenario for disconnectedness"事件的概率。
+    说明是$k(n)>\log n/8$是必要的。
+\end{exercise}
+
+\begin{exercise}
+    考虑1st最近邻图，顶点集为$\Phi$,其中$\Phi$是$\mathbb{R}^d$一个强度为1的PPP。
+    对于一般的维度数$d$，描述它的成分的性质。
+    接管关注$d=1$的case，陈述典型成分的大小的分布。
+\end{exercise}
+
+\begin{exercise}
+    考虑一个$\sigma^2=1/2$的高斯PPP（见例子2.2）,所以强度是$(n/\pi)e^{-r^2}$.在原点加上一个点，
+    通过连接距离在$s$以内的2个点定义圆盘图。让$\rho$是最大的半径$u$使得所有的在$b(o,u)$内部的点和
+    $o$连接。说明，假设$Rs<<1$,球$b(o,R)$内的孤立节点数量可以近似为
+    \begin{equation*}
+        \mathbb{E} N_{\mathrm{isol}}(R) \approx \frac{\exp \left(-n s^2 \mathrm{e}^{-R^2}\right)-\exp \left(-n s^2\right)}{s^2} .
+    \end{equation*}
+    接着，假设$n\rightarrow \infty$以及$n^{-1 / 2} \ll s \ll(\log n)^{-1 / 2}$,说明
+    \begin{equation*}
+        \rho \approx \log \left(n s^2 / \log \left(1 / s^2\right)\right)
+    \end{equation*}
+\end{exercise}
+

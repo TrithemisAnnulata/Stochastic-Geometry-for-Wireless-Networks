@@ -1,0 +1,108 @@
+\chapter{Bond percolation和site percolation}
+
+\section{随机树和分支过程}
+在涉及到图和它们的性质的问题中，经常是有用的去首先考虑无环的图，即，树。
+
+\subsection{正则分支树的渗流}
+
+
+
+
+
+
+todo todo todo todo
+todo todo todo todo
+todo todo todo todo
+todo todo todo todo
+
+\section*{练习题}
+\begin{exercise}
+    考虑2-branching树（也被称为二叉树），具有二项分布的后代分布，确定Percolation的概率，并且画出来，
+    找到(10.4),(10.5),(10.6)的临界指数$\beta,\gamma,\delta$
+\end{exercise}
+
+\begin{exercise}
+    展示二叉树的每一代中$(Z_n)$的成员数量的序列，从马尔可夫链条的角度去考虑，给出转移概率。
+\end{exercise}
+
+
+\begin{exercise}
+    对于【后代概率分布是均值为$\lambda$的Possion分布】的分支过程，找到它灭绝的概率$\eta$
+\end{exercise}
+
+\begin{exercise}
+    让$T$是分支过程的全体后代(total progency)，即，
+    \begin{equation*}
+        T \triangleq \sum_{n=0}^{\infty} Z_n
+    \end{equation*}
+
+    让它的生成函数是$G_T(s)=\mathbb{E}(s^T)$.说明
+    \begin{equation*}
+        G_T(s)=s G\left(G_T(s)\right)
+    \end{equation*}
+
+    其中，$G_{(s)}=\mathbb{E}(s^X)$是后代分布的生成函数。
+    
+    提示。首先建立，如果$Z_1=i$，
+    \begin{equation*}
+        T \stackrel{\mathrm{d}}{=} 1+\sum_{k=1}^i T_k
+    \end{equation*}
+    
+    其中，$T_k$是iid.的随机变量，和$T$有相同的分布。
+\end{exercise}
+
+\begin{exercise}
+    对于一个平均后代为$\mu<1$的分支过程，说明，期望的总体后代是
+    \begin{equation*}
+        \mathbb{E} T=\frac{1}{1-\mu} .
+    \end{equation*}
+\end{exercise}
+
+
+\begin{exercise}
+    使用随机游走解释递归公式(10.3)
+\end{exercise}
+
+
+\begin{exercise}
+    确定(渐进情形下)，图10.17中lozenge lattice的渗流阈值
+\end{exercise}
+
+
+\begin{exercise}
+    中枢边。考虑$\mathbb{L}^2$上一个bond percolation模型，事件$A=\{ o\leftrightarrow \partial B(1) \}$.
+    让四个边是$e_1,\cdots,e_4$。考虑一个显式的表达式,对于事件$W_i$使得：边$e_i,i\in[4]$是中枢的，
+    确定$\mathbb{P}_p(W_i)$。接着找到
+    $\mathbb{E}_p(N(A))$和$\mathbb{E}_p(N(A) \mid A)$。
+    当$p\rightarrow 0$的时候，这两个期望表现如何？这个行为是我们所预料到的吗？
+    解释这个现象。
+\end{exercise}
+
+
+\begin{exercise}
+    Russo公式。
+\end{exercise}
+
+
+\begin{exercise}
+    证明,对于$\mathbb{L}^2$上的bond percolation，$p_c=p_c^{\prime}$成立。
+    其中，
+    \begin{equation*}
+        p_{\mathrm{c}}^{\prime}=\sup \{p: \chi(p)<\infty\}
+    \end{equation*}
+
+    $\chi(p)$是原点处component的大小的期望值(正如10.1.4节定义的那样)
+\end{exercise}
+
+% 10.11
+\begin{exercise}
+    当证明infinite components数量不可能是无限的时候，我们使用了trifurcations（三叉点）的概念。
+    对具有three trifurcations的$n$，在diamond $S(n)$中画出一个configuration.
+    指明这样的边界点，满足它们被假定认为和一个infinite open cluster连通。
+    解释为什么bifurcations（二叉）不能得到这个结论。
+\end{exercise}
+
+
+
+
+

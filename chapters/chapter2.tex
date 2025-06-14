@@ -1,0 +1,176 @@
+\chapter{点过程的描述}
+
+\section{一维点过程的描述}
+
+
+
+
+
+
+\section*{练习题}
+\begin{exercise}
+    对于$\mathbb{R}$上的强度为$\lambda$的均匀PPP，推导interarrival
+    interval包括原点$o$的pdf。你观察了什么？
+\end{exercise}
+
+
+\begin{exercise}
+    让$X_m$是一个均值为$m$的泊松随机变量。如果$M$是一个服从Gamma分布
+    的随机变量，说明$X_M$的分布是negative binomial.
+\end{exercise}
+
+\begin{exercise}
+    让$\Phi$是$\mathbb{R}$上一个强度为$\lambda$的均匀PPP，确定
+    $\mathbb{P}( \Phi(B_1)=n_1,\Phi(B_2)=n_2)\text{ for }B_1=[0,2]\text{ and }B_2=[1,3]$
+\end{exercise}
+
+\begin{exercise}
+    让$(X_i),i\in \mathbb{N}$，是一族独立的均值为$1/\lambda$的指数分布的随机变量.
+    确定
+    \begin{equation*}
+        \mathbb{P}\left(X_1>t\right)+\sum_{k=1}^{\infty} \mathbb{P}\left(X_1+\cdots+X_k \leq s ; X_1+\cdots+X_{k+1}>t\right)
+    \end{equation*}
+    给出结果的解释，作为一个特定的点过程的void probability.
+\end{exercise}
+
+\begin{exercise}
+    结果空间$\mathcal{N}$可以定义为如下公式吗？
+    \begin{equation*}
+        \mathcal{N} \triangleq\left\{\varphi \subset \mathbb{R}^d:|\varphi|=0\right\} ?
+    \end{equation*}
+\end{exercise}
+
+\begin{exercise}
+    径向仿真。考虑正实数线上，一个强度为$1$的一维PPP$\Psi=\left\{y_i\right\} \subset \mathbb{R}^{+}$。
+    假定点是有序的，即，$y_1<y_2<\cdots$。考虑$\Psi$，
+    我们想要产生$\mathbb{R}^2$上强度为$\lambda$的HPPP $\Phi=\left\{\left(r_i, \varnothing_i\right)\right\}$的一个实现,
+    其中$(r_i,\phi_i)$是点的极坐标表示。振幅集合$\{ r_i\}$也应该是有序的。
+    从$y_i$到$r_i$找到函数，可以将一维度的点映射到二维度的振幅，with the desired intensity.
+\end{exercise}
+
+
+\begin{exercise}
+    生成函数。让$X_1,X_2,\cdots$是一系列iid的随机变量$\Omega \mathbb{N}_0$
+    的生成函数$G_X$.让$N$是一个随机变量，和$X_i$独立，
+    also taking values in $\mathbb{N}_0$. 展示
+    \begin{equation*}
+        S=X_1+X_2+\cdots+X_N
+    \end{equation*}
+    $S$具有生成函数$F_S(s)=G_N(G_X(s))$以及导数$G_S(s)$如果$N$是均值为$\lambda$的泊松随机变量。
+\end{exercise}
+
+\begin{exercise}
+    类比(2.3),找到一个表示,来计数二维ranomly translated lattice的测度。
+\end{exercise}
+
+\begin{exercise}
+    确定$\Lambda(\{ x\})$对于所有的$x\in \mathbb{R}^d$对于
+    例子2.1定义的点过程。
+\end{exercise}
+
+\begin{exercise}
+    写下die point process的显式分布
+\end{exercise}
+
+\begin{exercise}
+    例子2.3中的点过程，是两个(甚至更多)的基础点过程的“叠加”superpositionn.
+    找到他们，并且验证$P=P_1*P_2$,使用卷积的标准准则。
+\end{exercise}
+
+\begin{exercise}
+    考虑Bernoulli die process,定义如下：从初始的die process开始，接着独立地以概率$q$移走每一个点.
+    这样一个点过程也可以称为a die process with erasures，with erasure probability $q$.
+    定义$\Lambda(\{ o \})$和$\Lambda(\mathbb{R}^2)$
+\end{exercise}
+
+
+\begin{exercise}
+    让$s\Phi_{\text{die}}$是the die process $\Phi_{\text{die}}$ scaled by $s$.
+    让
+    \begin{equation*}
+        \Phi^{\prime}=\bigcup\left\{x \in \mathbb{Z}^2: x+\frac{1}{3} \Phi_{\text {die }}\right\}
+    \end{equation*}
+    
+    其中$x+\frac{1}{3}\Phi_{\text{die}}$是 a translation of the (scaled) die process by $x$，
+    考虑静态点过程$\Phi \triangleq \Phi_Y^{\prime}$,其中
+    $Y$是$[0,1]^2$上的均匀分布。找到$\Phi$的强度。
+\end{exercise}
+
+
+\begin{exercise}
+    让$\Phi\subset \mathbb{R} $是一个强度函数为$\lambda(x)=\mathbf{1}(x \in[0,1])$的均匀PPP。
+    如果我们独立地对每一个点做displacing by a random amount uniform on $[-1/2,1/2]$，
+    得到的点过程的强度是多少？
+\end{exercise}
+
+
+\begin{exercise}
+    让$\Phi=\{x_1,\cdots \}\subset \mathbb{R}$是一个强度为
+    $\lambda(x)=\mathbf{1}(0\leq x<2\pi)$的均匀PPP。
+    让$\Phi^\prime=\{\sin x_i \}$.  确定$\Phi^\prime$的强度$\lambda^\prime$
+\end{exercise}
+
+
+\begin{exercise}
+    让$\Phi$是一个高斯泊松过程，$\sigma=1$,$n=1$，让$B^{-}$是$\mathbb{R}^2$
+    的左半平面。对于$\Phi$以及对于$\Phi_{(1,0)}$确定
+    $\Lambda(B^{-})$.
+    提示，关联问题的第二部分和点对点问题的误比特率问题
+\end{exercise}
+
+\begin{exercise}
+    图2.2展示了确定的non-HPPP的实现。确定这个过程的强度测度$\Lambda([0,10]^2)$
+\end{exercise}
+
+\begin{exercise}
+    随机traslated lattice (看定义2.15)是遍历的吗？
+\end{exercise}
+
+
+\begin{exercise}
+    让$\Phi$是$\mathbb{R}^2$上一个强度1的HPPP。计算满足
+    $NN(NN(x))=x$的点的比例。这些是属于互相最近邻点对的节点。
+    这个比例依赖强度吗？同时计算，对于lattice，这个比例是多少？
+\end{exercise}
+
+
+\begin{exercise}
+    让$\Phi$指代randomly translated square integer lattice
+
+    （a）展示强度$\lambda \equiv 1$
+    （b）让$B_{\diamond}$是面积为$A,1<A<2$的方形区域，旋转了$\pi/4$，使得
+    相对的角点，他们的x坐标(或者y坐标)相等。找到$P(\Phi(B_{\diamond})=0)$,
+    以及$P(\Phi(B_{\diamond})>2)$，都写成$A$的函数的形式。
+\end{exercise}
+
+
+\begin{exercise}
+    我们想要产生一个isotropic PPP $\Phi\subset \mathbb{R}^2$的实现，此PPP的强度是
+    \begin{equation*}
+        \lambda(x)=\frac{M}{2 \pi \sigma^2} \exp \left(-\frac{\|x\|^2}{2 \sigma^2}\right), \quad x \in \mathbb{R}^2 .
+    \end{equation*}
+
+    Simulation的区域是$W=[-5,5]^2$。
+    (a)
+    (b)
+    (c)
+
+\end{exercise}
+
+\begin{exercise}
+    有向空空间函数。让$\Phi\subset \mathbb{R}^2$是一个强度为1的PPP。
+    让$\{ (r_i,\phi_i) \}$是点集的极坐标表示。让$n\in \mathbb{N}$，定义
+    \begin{equation*}
+        R_k=\min \left\{\left(r_i, \phi_i\right) \in \Phi, k \frac{2 \pi}{n}<\phi_i \leq(k+1) \frac{2 \pi}{n}: r_i\right\}, \quad k=0,1, \ldots, n-1
+    \end{equation*}
+
+    $R_k$是最近邻节点和原点的距离，在kth sector of width $2\pi/n$
+
+    我们感兴趣$R_k$中最小值的CDF。不计算，你估计这个CDF有哪些性质？
+    
+    为了验证你算出来的CDF，使用Problem1.2中得到的结果。
+\end{exercise}
+
+\begin{exercise}
+    描述具有图2.10所示Fry Plot的PPP。
+\end{exercise}

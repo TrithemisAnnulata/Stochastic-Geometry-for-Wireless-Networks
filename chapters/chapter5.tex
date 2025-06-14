@@ -1,0 +1,1018 @@
+\chapter{无线网络中的干扰和中断}
+在这一章，我们讨论无线网络中点过程的和以及其他函数的一些应用。
+其中点过程理论最著名的一个应用就是对干扰进行特征化。
+这里的干扰，我们通常指干扰功率。
+
+\section{对干扰进行特征化}
+
+\subsection{将干扰看作一个散粒噪声}
+让$\ell: \mathbb{R}^d \mapsto \mathbb{R}^{+}$是一个路径损耗函数。
+如果我们用一个点过程$\Phi$对发送机的位置进行建模，所有的发送机都以单位功率发送，
+在位置$y$处测量到的总和功率是
+\begin{equation}
+    I(y)=\sum_{x \in \Phi} \ell(y-x), \quad y \in \mathbb{R}^d
+\end{equation}
+
+假设信道中没有衰落。通过和式子(3.24)进行比较，干扰$sI(y)$
+是一个散粒噪声随机场。更精确地说，因为路径损失规律是典型的形式
+$\ell(x)=\|x\|-\alpha$（或者它的一个有界的版本），它是一个功率律的散粒
+噪声随机场。一个例子在Fig. 5.1中展现，其中从一个PPP引起的干扰用平面上的一条线表示。
+
+\subsection{静态点过程的平均干扰}
+首先，我们对功率律$\ell(x)=\|x\|-\alpha$情形下，一个强度为$\lambda$的
+平稳的发射机点过程$\Phi \subset \mathbb{R}^d$的干扰的平均值，进行推导。
+因为期望是对所有的点过程进行考虑的，遵循平稳性$\mathbb{E}I(y)=\mathbb{E}I(o)$
+（事实上，对所有的的$y\in \mathbb{R}^d$都有 $I(y)\stackrel{\mathrm{d}}{=} I(o)$ ） ,
+我们可以聚焦于原点，那里
+\begin{equation}
+    \mathbb{E} I=\mathbb{E}\left(\sum_{x \in \Phi}\|x\|^{-\alpha}\right)
+\end{equation}
+
+利用Cambell的求和公式(定理4.1)
+\begin{equation}
+    \mathrm{E} I=\lambda \int_{\mathbf{R}^d}\|x\|^{-\alpha} \mathrm{d} x .
+\end{equation}
+
+在2维的case，
+\begin{equation}
+    \lambda \int_{\mathbb{R}^2}\|x\|^{-\alpha} \mathrm{d} x=\lambda \int_0^{2 \pi} \int_0^{\infty} r^{-\alpha} r \mathrm{~d} r \mathrm{~d} \varphi= \begin{cases}\left.2 \pi \frac{\lambda}{2-\alpha} r^{2-\alpha}\right|_0 ^{\infty}, & \alpha \neq 2 . \\ \left.2 \pi \lambda \log r\right|_0 ^{\infty}, & \alpha=2 .\end{cases}
+\end{equation}
+
+当$\alpha\neq2$的时候，事实上积分并不收敛，
+当$\alpha=2$的时候，积分也并不收敛。
+所以对于满足功率路径损耗律的情形，2维空间中的平均干扰是无穷的，
+对于所有的路径损失指数$\alpha$都是如此
+
+在3维中，我们发现
+\begin{equation}
+    \mathbb{E} I=\lambda \int_{\mathbb{R}^3}\|x\|^{-\alpha} \mathrm{d} x=\left.4 \pi \frac{\lambda}{3-\alpha} r^{3-\alpha}\right|_0 ^{\infty}, \quad \alpha \neq 3 .
+\end{equation}
+
+再一次，没有$\alpha$取值可以让积分收敛。我们可能推断这个结论对任意的维度都成立。
+为了深入研究，我们关注均匀PPP，应用映射定理(Theorem 2.34)将它投射到一维。
+
+1.使用函数$f(x)=\| x \|$映射到一维。新的点过程$\Phi^{\prime}$，具有intensity measure为 
+$\Lambda^{\prime}([0, r))=\lambda c_d r^d$和intensity function为$\lambda^{prime}(r)=\lambda_d d r^{d-1}$，
+其中$c_d$是$d$维单位球的体积。
+2.应用Campbell定理得到【和的平均】
+\begin{equation}
+    \begin{aligned}
+        \mathbb{E} I=\mathbb{E}\left(\sum_{r \in \Phi^{\prime}} r^{-\alpha}\right) &=\int_0^{\infty} r^{-\alpha} \lambda^{\prime}(r) \mathrm{d} r \\
+        &=\left.\lambda c_d \frac{d}{d-\alpha} r^{d-\alpha}\right|_0 ^{\infty}, \quad \alpha \neq d .
+        \end{aligned}
+\end{equation}
+所以，对于所有的$d$，没有$d$可以让这个平均存在。如果$\alpha\leq d$，
+原函数在$\alpha=\infty$处为无穷，那意味着远处的所有的干扰器对干扰贡献了绝大部分。
+换言之，平均干扰变得无穷，因为节点的数量是无穷的。
+如果$\alpha\geq d$，原函数在$\alpha=0$处为无穷,表明和原点非常近的那些节点对干扰贡献了大部分，
+因为路径损失律的奇异性。
+
+尽管平均干扰在$\alpha \leq d$和$\alpha \geq d$的时候都发散，这两种分散在定性上是非常不同的。
+如果$\alpha >d$，条件(4.5)满足，所以干扰是有限的，a.s. almost surely.
+另一方面，如果$\alpha\leq d$，条件(4.5)并不满足，表明干扰是无限的，a.s.
+所以在第一个case里，我们可以期望干扰具有一个定义良好的分布(尽管长尾导致均值发散)，
+而在第二种情况下，其分布不存在，因为我们不仅有
+$\mathbb{E}I=\infty$，也有$I=\infty$ a.s.
+
+这个均值的发散性，明显是因为附近的干扰器明显是一个modeling artifact，
+因为没有一个接收机获得比发射的功率更多的功率。
+如果路径损失函数被一个更加精确的函数替代，比如
+\begin{equation}
+    \ell(x)=\min \left\{1,\|x\|^{-\alpha}\right\} \quad \text { or } \quad \ell(x)=(1+\|x\|)^{-\alpha} \text {, }
+\end{equation}
+
+这样在$r\rightarrow 0$的modeling artifact就被改善了，条件(4.5)总是满足，
+只要$\alpha >d$均值干扰就是有限的。\\
+
+
+\begin{remark}
+    \begin{itemize}
+        \item 为什么我们不能使用$\|x \|^{-\alpha}$直接作为映射函数？原因是
+        ，如果这样，得到的点过程将不会是局部有限的：
+        我们将有$\Lambda^{\prime}([0,1])=\Lambda([1,\infty])=\infty$,
+        这违反了均值测度的有限性。
+        \item 对于相同intensity的所有点过程，均值是完全相等的。以及，由于平稳性，
+        干扰也是相同的，无论我们在$\mathbb{R}^d$的哪里测量。我们将会在后续的章节讨论：
+        如何去确定过程中一个点或邻近一个点的干扰，而不是任意的位置。
+      \end{itemize}
+\end{remark}
+
+
+在无线网络中的语境中，均匀PPP经常是一个泊松网络。
+
+\subsection{泊松网络中干扰的方差}
+在泊松网络的case中，我们使用Corollarys 4.8来找到干扰的方差。
+让$\ell(x)=\min \left\{r_0^{-\alpha},\|x\|^{-\alpha}\right\} \text { for } r_0>0$。
+对于一个$\mathbb{R}^d$上的homogeneous PPP，我们有
+\begin{equation}
+    \begin{aligned}
+        \operatorname{var} I=\lambda \int_{\mathbb{R}^d} \ell^2(x) \mathrm{d} x &=\lambda c_d r_0^{d-2 \alpha}+\left.\frac{\lambda c_d d}{d-2 \alpha} r^{d-2 \alpha}\right|_{r_0} ^{\infty} \\
+        &=\lambda c_d r_0^{d-2 \alpha}\left(\frac{2 \alpha}{2 \alpha-d}\right), \quad \text { for } 2 \alpha>d
+        \end{aligned}
+\end{equation}
+
+条件$2\alpha>d$经常是满足的。如果网络是有限的，我们让$r_0\rightarrow 0$，
+对于有限方差，我们需要$\alpha<d/2$，$\alpha$的范围是非常不可能的.
+
+\subsection{泊松网络中附近发射机的干扰}
+在一些case中，我们可能对从仅仅单个附近发射机发出的干扰感兴趣。
+我们首先关注距离原点最近的发射机，标记它的干扰为$I_1$。事实上，
+这个信号功率可能事实上表示我们关心的信号，因为它来自一个邻近的节点；
+在这个case中，$I_1$可能是关心的功率。
+
+使用例子2.11中计算的距原点最近点的距离，我们发现
+\begin{equation}
+    \mathbb{P}\left(I_1 \leq x\right)=\mathbb{P}\left(R^{-\alpha} \leq x\right)=\mathbb{P}\left(R>x^{-1 / \alpha}\right)=\exp \left(-\lambda c_d x^{-\delta}\right)
+\end{equation}
+
+其中$\delta \triangleq d / \alpha$。均值是
+\begin{equation}
+    \mathbb{E} I_1=c^{1 / \delta} \Gamma(1-1 / \delta)
+\end{equation}
+
+如果$\delta<1$,那么这根本不存在。所以，如果是奇异路径损失律的情形，
+来自唯一最近节点的平均干扰是无限的。这是由于对于小$\delta$分布的长尾：
+\begin{equation}
+    \mathbb{P}\left(I_1>x\right) \sim \lambda c_d x^{-\delta}, x \rightarrow \infty .
+\end{equation}
+
+如果$\delta<1$,$\int \mathbb{P}\left(I_1>x\right) \mathrm{d} x $发散，
+因此，平均值并不存在。广义上，$\mathbb{E}(I_1^p)$对于$p<\delta$存在。
+
+类比地，我们有pdf概率分布函数
+\begin{equation}
+    f_{I_1}(x) \sim \lambda c_d \delta x^{-\delta-1}, x \rightarrow \infty
+\end{equation}
+
+接下来我们把这个表达式推广到nth近邻干扰器的干扰$I_n$的情形。
+nth近邻$R_n$的距离的the survivor function(和cdf互补)可以从式子(2.12)得到
+\begin{equation}
+    \mathbb{P}\left(R_n>r\right)=\frac{\Gamma_{\mathrm{ic}}\left(n, \lambda c_d r^d\right)}{\Gamma(n)}
+\end{equation}
+
+所以，对于$n=2$,
+\begin{equation}
+    \mathbb{P}\left(I_2<x\right)=\exp \left(-\lambda c_d x^{-\delta}\right)\left(1+\lambda c_d x^{-\delta}\right)
+\end{equation}
+
+以及
+\begin{equation}
+    \mathbb{P}\left(I_2>x\right) \sim \frac{1}{2}\left(\lambda c_d\right)^2 x^{-2 \delta} .
+\end{equation}
+
+所以我们需要$2\delta>1$来让$\mathbb{E}I_2$存在。对于一般的$n$，
+\begin{equation}
+    \mathbb{P}\left(I_n<x\right)=\exp \left(-\lambda c_d x^{-\delta}\right) \sum_{i=0}^{n-1} \frac{\left(\lambda c_d x^{-\delta}\right)^i}{i !}
+\end{equation}
+
+对于长尾概率，我们需要从$n$加到$\infty$，所以主导项将会是当$x\rightarrow \infty$ 有$i=n$的那一个。
+因此
+\begin{equation}
+    \mathbb{P}\left(I_n>x\right) \sim \frac{1}{n !}\left(\lambda c_d\right)^n x^{-n \delta}
+\end{equation}
+
+这意味着$\mathbb{E}(I_n^p)$存在，如果$p<n\delta$。因此，如果
+干扰消除技术被使用来达到一个有限的2nd moment,$k>\alpha$干扰器需要被
+消除，在二维的网络中。
+尽管我们可以找到对所有的$n$,$I_n$的分布，通过这种方式很难得到
+总共干扰的分布，因为$I_n$既不是独立也不是同分布的。
+我们换一种思路进行处理，分为考虑衰落和不考虑衰落两种情形来进行讨论。
+
+
+\subsection{没有衰落的泊松网络中，干扰的分布}
+在本小节中，我们关注二维网络的情况，并假设没有衰落。因为$\ell(x)$假设是各向同性的，我们也使用它的一维
+版本$\tilde{\ell}: \mathbb{R}^{+} \mapsto \mathbb{R}^{+}$，
+所以$\tilde{\ell}(\|x\|) \equiv \ell(x) .$
+这里我们假定$\tilde{\ell(x)}$是严格单调减的(invertible)，以及$\lim _{r \rightarrow \infty} \tilde{\ell}(r)=0$
+
+我们的目标是找到干扰的特征函数，进一步，如果可能，找到它的
+分布。我们遵循一种基本但强大的技术，使用Sousa\&Silvester(1990)用到的技术，
+它包括以下2步：
+\begin{itemize}
+    \item 1. 首先考虑一个有限的网络，假定半径为$a$的圆盘，中心在原点，
+    对此有限区域中具有固定数量节点做condition。节点的位置是i.i.d.的事件。
+    \item 2. 接着de-condition作用在(Poisson)数量的节点，让圆盘半径趋向无穷。
+\end{itemize}
+
+\text{Step 1. }考虑和原点相距$a$的节点发出的干扰：
+\begin{equation}
+    I_a=\sum_{x \in \Phi \cap b(o, a)} \tilde{\ell}(\|x\|) .
+\end{equation}
+
+在$a\rightarrow \infty$的极限下，$I_a\rightarrow I$.让$\mathcal{F}_{I_a}$是随机变量$I_a$的
+特征函数,即
+\begin{equation}
+    \mathcal{F}_{I_a}(\omega) \triangleq \mathbb{E}\left(\mathrm{e}^{\mathrm{j} \omega I_a}\right), \mathrm{j}=\sqrt{-1} .
+\end{equation}
+
+对半径$a$的具有$k$个节点的圆盘做Condition，
+\begin{equation}
+    \mathcal{F}_{I_a}(\omega)=\mathbb{E}\left(\mathbb { E } \left(\mathrm{e}^{\left.\mathrm{j} \omega I_a \mid \Phi(b(o, a))=k\right)}\right.\right.
+\end{equation}
+
+考虑到有$k$个点在$b(o,a)$，这些圆盘上的点是i.i.d.的，具有径向密度
+\begin{equation}
+    f_R(r)= \begin{cases}2 r / a^2 & \text { if } 0 \leq r \leq a \\ 0 & \text { otherwise }\end{cases}
+\end{equation}
+
+特征函数是$k$个独立特征函数的乘积：
+\begin{equation}
+    \mathrm{E}\left(\mathrm{e}^{\mathrm{j} \omega I_a} \mid \Phi(b(o, a))=k\right)=\left(\int_0^a \frac{2 r}{a^2} \exp (\mathrm{j} \omega \tilde{\ell}(r)) \mathrm{d} r\right)^k
+\end{equation}
+
+\text{Step 2. }在$b(o,a)$找到$k$个节点的概率由泊松分布给出，因此
+\begin{equation}
+    \mathcal{F}_{I_a}(\omega)=\sum_{k=0}^{\infty} \frac{\exp \left(-\lambda \pi a^2\right)\left(\lambda \pi a^2\right)^k}{k !} \mathrm{E}\left(\mathrm{e}^{\mathrm{j} \omega I_a} \mid \Phi(b(o, a))=k\right)
+\end{equation}
+
+将(5.2)式带入上式，对$k$求和，将和理解为指数函数的泰勒展开，我们得到
+\begin{equation}
+    \mathcal{F}_{I_a}(\omega)=\exp \left(\lambda \pi a^2\left(-1+\int_0^a \frac{2 r}{a^2} \exp (\mathrm{j} \omega \tilde{\ell}(r)) \mathrm{d} r\right)\right) .
+\end{equation}
+
+做替换$r\rightarrow \ell^{-1}(x)$，其中${\tilde{\ell}}^{-1}$是$\tilde{\ell}$的逆，
+让$a\rightarrow \infty$，产生
+\begin{equation}
+    \lim _{a \rightarrow \infty} a^2\left(-1+\int_0^a \frac{2 r}{a^2} \exp (\mathrm{j} \omega \tilde{\ell}(r)) \mathrm{d} r\right)=\int_0^{\infty}\left(\tilde{\ell}^{-1}(x)\right)^2 \mathrm{j} \omega \mathrm{e}^{\mathrm{j} \omega x} \mathrm{~d} x
+\end{equation}
+
+
+所以
+\begin{equation}
+    \mathcal{F}_I(\omega)=\exp \left(\mathrm{j} \lambda \pi \omega \int_0^{\infty}(\tilde{\ell}-1(x))^2 \mathrm{e}^{\mathrm{j} \omega x} \mathrm{~d} x\right) .
+\end{equation}
+
+为了得到更多正确的结果，我们需要指定路径损失律。对于标准功率律
+$\tilde{\ell}(r)=r^{-\alpha}$，我们得到
+\begin{equation}
+    \mathcal{F}_I(\omega)=\exp \left(j \lambda \pi \omega \int_0^{\infty} x^{-2 / \alpha} \mathrm{e}^{\mathrm{j} \omega x} \mathrm{~d} x\right)
+\end{equation}
+
+对于$\alpha\leq 2$，积分发散，表明干扰是无穷的a.s. 对于$\alpha >2$，
+\begin{equation}
+    \mathcal{F}_I(\omega)=\exp \left(-\lambda \pi \Gamma(1-2 / \alpha) \omega^{2 / \alpha} \mathrm{e}^{-\mathrm{j} \pi / \alpha}\right), \quad \omega \geq 0 .
+\end{equation}
+
+对于负的$\omega$，上式由对称条件$\mathcal{F}_I^*(-\omega)=\mathcal{F}_I(\omega)$确定。
+对于$\alpha=4$，
+\begin{equation}
+    \mathcal{F}_l(\omega)=\exp \left(-\lambda \pi^{3 / 2} \exp (-j \pi / 4) \sqrt{\omega}\right) .
+\end{equation}
+
+这个case引起了我们的兴趣，因为它是唯一的case使得密度以闭形式的形式存在：
+\begin{equation}
+    f_I(x)=\frac{\pi \lambda}{2 x^{3 / 2}} \exp \left(-\frac{\pi^3 \lambda^2}{4 x}\right) .
+\end{equation}
+
+这就是所谓的 Lévy distribution，也可以看成一个逆的gamma distribution，或者看成无限均值高斯分布的逆。
+对于其他的$\alpha$值，密度可能得用无穷级数的形式表示(Sousa\&Silvester 1990,Eqn.(22)).
+
+\subsection{稳定分布}
+为了解释式子(5.5)的特征函数，我们简要地介绍stable distributions类族.
+
+\begin{definition}
+    (稳定分布) 一个随机变量$X$被称为具有稳定分布，
+    如果对于所有的$a,b>0$，存在$c>0,d$，满足
+    \begin{equation}
+        a X_1+b X_2 \stackrel{\mathrm{d}}{=} c X+d,
+    \end{equation}
+    其中$X_1$和$X_2$是和$X$具有相同分布的i.i.d.的r.v. 如果式子(5.7)对于
+    $d=0$成立，那么分布是严格稳定的。
+\end{definition}
+
+\begin{theorem}
+    对于任意的稳定的随机变量$X$，有一个在$0<\delta\leq 2$范围的参数$\delta$，
+    让定义中的$c$满足$c^\delta=a^\delta+b^\delta$.
+\end{theorem}
+
+参数$\delta$是【指数特征】，也称为【稳定性指数】。对于高斯随机变量，
+$\delta=2$，因为$aX_1+bX_2$是均值$(a+b)\mu$且方差$(a^2+b^2)\sigma^2$的高斯随机变量，即，
+分布对于$c=\sqrt{a^2+b^2}$和$d=(a+b-c)\mu$成立。一般地，一个稳定分布的特征函数是：
+
+\begin{equation}
+    \mathbb{E}\left(\mathrm{e}^{\mathrm{j} t X}\right)= \begin{cases}\exp \left(\mathrm{j} t \mu-\gamma|t|^\delta(1-\mathrm{j} \beta \operatorname{sgn}(t) \tan (\pi \delta / 2))\right) & \delta \neq 1 \\ \exp (\mathrm{j} t \mu-\gamma|t|(1+\mathrm{j}(2 \beta / \pi) \operatorname{sgn}(t) \log (|t|))) & \delta=1,\end{cases}
+\end{equation}
+
+其中$\operatorname{sgn}(t)$是$t$的符号，$\beta\in [-1,1]$是偏度参数，
+$\mu$是漂移，$\gamma$是分散参数。比较式子(5.8)和式子(5.5)，我们观察到式子(5.5)是
+一个随机变量的特征函数，其中$\delta=2/\alpha,\beta=1,\mu=0$，
+\begin{equation*}
+    \gamma=\frac{\lambda \pi \Gamma(1-2 / \alpha)}{\cos (\pi / \alpha)}=\frac{\lambda \pi \Gamma(1-\delta)}{\cos (\pi \delta / 2)}
+\end{equation*}
+
+尤其是，对于$\alpha=4$，$\gamma=\lambda\pi^{3/2}/\sqrt{2}$. 正如之前提到的，这个case中，
+其中$\delta=1/2$，是唯一的case满足干扰功率的pdf存在。
+
+偏度$\beta=1$意味着随机变量的支撑集限定为$\mathbb{R}^{+}$。
+
+一个偏度$\beta=1$且漂移$\mu=0$的稳定随机变量$X$的拉普拉斯变换，具有如下的紧凑型：
+\begin{equation}
+    E\left(e^{-s X}\right)=e^{-\kappa s^\delta}
+\end{equation}
+
+参数$\kappa $和$k$相关，关系是$k=\kappa\cos(\pi/\alpha)$，我们
+将$\kappa$称为dispersion参数或者scale参数。
+这并不违反公共术语，因为不幸的是，对于稳定分布，存在非常多的不同的，关于dispersion和scale的定义。
+在表格(5.9)中，高斯随机变量的dispersion等于方差的一半。对于其他的稳定分布
+($\delta<2$)，方差并不存在，但是dispersion表演一个相似的角色，因为它表明
+此分布延展得多宽。
+
+稳定分布的理论包括结果，可以将PPP和稳定分布联系起来。
+
+\begin{theorem}
+    (级数表示) 让$\{\tau_i\subset\mathbb{R} \}$表示强度$\lambda$的PPP的到达时间，
+    让$(h_i)$是和$\tau_i$独立的一族随机变量，如果有限和
+    \begin{equation}
+        \sum_{i=1}^{\infty} \tau_i^{-1 / \delta} h_i
+    \end{equation}
+
+    收敛a.s. ，那么这个级数和会收敛到一个稳定随机变量。
+\end{theorem}
+
+式子(5.10)被称为LePage级数表示/LePage series representation  
+
+这和我们已经发现的结果一致，因为，在我们的case中，距离增长到$d$th power，
+$r_i^d=\| x_i \|^d$，包括一个强度为$\lambda_{c_d}$的homogeneous PPP.
+所以我们的和变成
+\begin{equation*}
+    \sum_{i=1}^{\infty}\left(r_i^{-d}\right)^{-\alpha / d}
+\end{equation*}
+
+以及$\delta=d/\alpha$.
+
+定理5.3的一个结果如下所示
+
+\begin{corollary}
+    (干扰的尺度变换) 让$I(\lambda)$是强度为$\lambda$的单位PPP $\Phi\subset \mathbb{R}^d$，
+    路径损失函数为$\ell(x)=\| x \|^{-\alpha}$.那么
+    \begin{equation*}
+        a I(\lambda) \stackrel{\mathrm{d}}{=} I\left(a^\delta \lambda\right), \quad \forall a>0 \text {, where } \delta=d / \alpha
+    \end{equation*}
+\end{corollary}
+
+这看起来可能有些反直觉，但是它和(5.7)其实是一致的。因为$I(\lambda_1+\lambda_2)\stackrel{\mathrm{d}}{=} I(\lambda_1)+I(\lambda_2)$，
+(利用PPP的superposition性质)，我们可以从推论中得到
+\begin{equation*}
+    a I_1(\lambda)+b I_2(\lambda) \stackrel{\mathrm{d}}{=} I_1\left(a^\delta \lambda\right)+I_2\left(b^\delta \lambda\right) \stackrel{\mathrm{d}}{=} I\left(\left(a^\delta+b^\delta\right) \lambda\right) \stackrel{\mathrm{d}}{=} c I(\lambda)
+\end{equation*}
+
+其中$c=(a^\delta+b^\delta)^{1/\delta}$，$I,I_1,I_2$来源于3个有各自强度的独立的PPP。
+
+从上面的推论中我们可以直接获得干扰的拉普拉斯变换，如果功率放缩$P$倍。
+因为$I \propto P$，我们有$PI(\lambda)=I(P^\delta \lambda)$，即，功率放缩$P$倍
+和密度放缩$P^\delta$倍有着相同的效果。所以，可能反直觉的，如果稳定分布，干扰和密度$\lambda$并不成比例。
+
+$\delta<1$的稳定分布变量具有性质：iid的$X_n$的算术平均$(X_1+\cdots+X_n)/n$
+随着$n$增长，和$X_k n^{1/\delta-1}$相等。
+n个这样稳定的随机变量的总和和最大值以相同的方式缩放，
+i、 例如，总和由偶尔的大值控制。
+
+Figure 5.2 展示了对powe-law路径损失的PPP的干扰建模的稳定随机变量的实现。
+对应的surrvicvor funciton在Figure 5.3中给出。
+
+对应的拉普拉斯变换是
+\begin{equation}
+    \mathcal{L}_I(s)=\exp \left(-\lambda \pi \Gamma(1-2 / \alpha) s^{2 / \alpha}\right)
+\end{equation}
+
+特征指数小于1的稳定分布没有任何有限矩。特别是，平均干扰发散，这是由于原点处路径损耗定律的奇异性。
+这也可以从$\mathbb{E}(I)=-\left.(\mathrm{d} / \mathrm{d} s) \log \left(\mathcal{L}_I(s)\right)\right|_{s=0}=\lim _{s \rightarrow 0} c s^{2 / \alpha-1}=\infty$
+很容易得出。
+
+使用节点位置的iid性质，对固定数量的节点进行conditioning处理，并对泊松分布进行条件处理的方法适用于许多其他问题。
+
+
+\subsection{有衰落情形下的干扰分布}
+有衰落的情形下，从每个发射机$x$发出的功率，会被乘上一个衰落系数$h_x$，假设i.i.d. .
+因此干扰由下面的和式给出：
+\begin{equation*}
+    I=\sum_{x \in \Phi} h_x \ell(x),
+\end{equation*}
+
+我们的目标是计算拉普拉斯变换
+\begin{equation*}
+    \mathcal{L}(s)=\mathbb{E} \mathrm{e}^{-s I}=\mathrm{E}\left(\prod_{x \in \Phi} \mathrm{e}^{-s h \ell(x)}\right)
+\end{equation*}
+
+因为衰落是iid的，所以
+\begin{equation*}
+    \mathcal{L}(s)=\mathbb{E}_{\Phi}\left(\prod_{x \in \Phi} \mathbb{E}_h\left(\mathrm{e}^{-s h \ell(x)}\right)\right)
+\end{equation*}
+
+将此PPP映射到一维，我们知道$\lambda(r)=\lambda c_d r^{d-1}$。再一次让
+$\tilde{\ell}(\| x \|)\equiv \ell(x)$。现在我们对$v(r)=\mathbb{E}_h\left(\mathrm{e}^{-\operatorname{sh} \ell(r)}\right)$
+使用pgfl，得到
+\begin{equation*}
+    \mathcal{L}(s)=\exp \left\{-\int_0^{\infty} \mathrm{E}_h\left[1-\mathrm{e}^{-s h \bar{\ell}(r)}\right] \lambda(r) \mathrm{d} r\right\}
+\end{equation*}
+
+对于1维的PPP，对$h$做condition，我们有
+\begin{equation*}
+    \begin{aligned}
+        \int_0^{\infty}(1-\exp (-s h \tilde{\ell}(r))) \lambda(r) \mathrm{d} r &=\lambda c_d \int_0^{\infty}\left(1-\exp \left(-s h r^{-\alpha}\right)\right) d r^{d-1} \mathrm{~d} r \\
+        & \stackrel{(a)}{=} \lambda c_d \int_0^{\infty}(1-\exp (-s h / y)) \delta y^{\delta-1} \mathrm{~d} y \\
+        & \stackrel{\text { bb }}{=} \lambda c_d \int_0^{\infty}(1-\exp (-s h x)) \delta x^{-\delta-1} \mathrm{~d} x \\
+        & \stackrel{(c)}{=} \lambda c_d \int_0^{\infty} x^{-\delta} s h \exp (-s h x) \mathrm{d} x \\
+        &=\lambda c_d(h s)^\delta \Gamma(1-\delta), \quad 0<\delta<1
+        \end{aligned}
+\end{equation*}
+
+其中(a)是因为做了替换$y\leftarrow r^{-1/\alpha}$，
+(b)是因为$x\leftarrow y^{-1}$，(c)是因为积分改写。
+聚焦于对于$h$随机性求期望，我们得到
+\begin{equation*}
+    \mathcal{L}(s)=\exp \left(-\lambda c_d \mathbb{E}\left(h^\delta\right) \Gamma(1-\delta) s^\delta\right)
+\end{equation*}
+
+所以，有衰落的情形下，干扰也必须是一个指数特征为$\delta$的稳定分布。
+分散系数$\kappa$从$\mathbb{E}(h^\delta)$到$\lambda c_d \mathbb{E}(h^\delta)\Gamma(1-\delta)$改变。
+
+在瑞利衰落的case中，其中$h$是指数的，$\mathbb{E}(h^\delta)=\Gamma(1+\delta)$，
+所以
+\begin{equation*}
+    \begin{aligned}
+        \mathcal{L}(s) &=\exp \left(-\lambda c_d \Gamma(1+\delta) \Gamma(1-\delta) s^\delta\right) \\
+        &=\exp \left(-\lambda c_d \frac{\pi \delta}{\sin (\pi \delta)} s^\delta\right) \\
+        &=\exp \left(-\frac{\lambda c_d}{\operatorname{sinc} \delta} s^\delta\right)
+        \end{aligned}
+\end{equation*}
+
+当$\delta \rightarrow 1$，$\sin(\pi\delta)\sim \pi (1-\delta)$，所以极限情形下我们有
+\begin{equation*}
+    \mathcal{L}(s) \approx \exp \left(-\lambda c_d s^\delta \frac{\delta}{1-\delta}\right)
+\end{equation*}
+
+这表明：当路径损失指数接近网络维度时，分散锐利地增长。
+
+
+\section{泊松网络中中断的概率}
+\begin{definition}
+    （定义SINR） SINR的定义是
+    \begin{equation}
+        \mathrm{SINR} \triangleq \frac{S}{W+I}
+    \end{equation}
+    其中$S$是我们关心的信号的功率，$W$是噪声的功率，$I$是干扰的功率。
+    如果噪声被忽略($W=0$)，SINR退化为SIR。
+\end{definition}
+
+对于固定调制，固定编码制式，干扰被看作噪声对待，
+例如，使用一个简单线性接收机，一个公认的打包模型是：
+如果SINR超过某个阈值$\theta$，则传输成功。所以我们
+如下定义成功概率。
+
+\begin{definition}
+    (定义传输成功概率) 传输成功概率$p_s(\theta)$的定义是：
+    \begin{equation}
+        p_{\mathrm{s}}(\theta) \triangleq \mathbb{P}(\text { SINR }>\theta)
+    \end{equation}
+    
+\end{definition}
+而$1-p_s$就是中断概率。
+
+阈值$\theta$和 (物理层)（比特？）传输率$R$相关。
+利用香农信道容量公式，他们由$\theta=2^R-1$相关联；
+由于实际限制，阈值应该选取得略大，来给$R$提供容限。
+
+
+
+\section{泊松双极网络中的空间吞吐}
+\begin{definition}
+    (泊松双极网络)\quad 一个泊松双极网络包括由系列发射机$\{ x_i \}\subset \mathbb{R}^2$组成的PPP，
+    ，还包括系列接收机$\{ y_i \}$，
+    每个接收机均匀随机选择朝向进行接收。
+    每一对接收机发射机满足$\| x_i-y_i \|=r\text{ for all }i$.
+
+    使用displacement theorem(Theorem 2.33)，接收机$\{ y_i \}$的点过程本身也是PPP。
+    所以泊松双极网络包括两个【有依赖关系的】PPP，即一个发射机PPP和一个接收机PPP。
+
+
+\end{definition}
+
+
+\subsection{空间吞吐}
+成功概率$p_s$可以堪称对特定链路的一个吞吐度量。
+为了量化整个网络的性能，吞吐量需要在所有链路上平均。
+假设泊松双极网络的每一个发射机决定以概率$p$发射，以概率$1-p$静默。
+这是所谓的ALOHA信道接入制式。在一个强度为$\lambda$的泊松双极网络，
+空间吞吐可能定义为
+\begin{equation}
+    T(p) \triangleq p \lambda p p_s(p, r)
+\end{equation}
+
+其中$p_s(p,r)$是发射机在距离$r$上，以概率$p$选择发射，通信的成功概率。
+对于一个给定的$r$，它在
+\begin{equation}
+    p_{\mathrm{opt}}=\frac{1}{\lambda \theta^\delta \pi \Gamma(1-\delta) \Gamma(1+\delta) r^2}
+\end{equation}
+
+处取得最大值。当然，$p_{\mathrm{opt}}$不能超过1.
+如果右侧的表达式产生一个大于1的值，那就表明网络密度$\lambda$可以增加
+来达到一个更高的吞吐。类似地，链路距离$r$可以包括在度量中，
+这将导致运输能力并且优化。
+
+\subsection{香农吞吐}
+空间吞吐量是基于中断的度量，因为某些传输不会
+成功。相反，如果发射机能够对SINR条件做出快速反应
+并调整其传输速率，另一个量可能是相关的，称为
+香农吞吐(Baccelli \& Blaszczyszyn (2009)提出)。
+考虑$p_s(\theta)$作为门限$\theta$的函数，香农吞吐(以nats的单位)是：
+\begin{equation}
+    \begin{aligned}
+        \mathbb{E} \log (1+\mathrm{SINR}) &=-\int_0^{\infty} \log (1+\theta) \mathrm{d} p_{\mathrm{s}}(\theta) \\
+        & \stackrel{\text { (a) }}{=} \int_0^{\infty} p_{\mathrm{s}}\left(\mathrm{e}^x-1\right) \mathrm{d} x
+        \end{aligned}
+\end{equation}
+
+这里(a)是因为一个随机变量$X$的期望可以用它的survivor funciton来表示。
+乘以当前发射机的密度，得到另一种类型的
+空间吞吐量——我们把干扰当做噪声可以期待的最好的吞吐。
+
+
+
+
+
+
+\section{传输容量}
+Weber等人（2005）中引入的传输容量是无线网络的性能指标，用于测量成功传输的空间强度，受允许中断概率的限制（当接收器处的SINR低于阈值时发生中断）。限制停机概率的优点是
+这在许多应用中是必要的。相反，如（5.15）所示，最大化空间吞吐量可能会导致如下成功概率
+低为e–1，这意味着每个数据包会多次重传，进而导致不可接受的延迟。此外，与其他指标相比，传输容量相对可控；在某些情况下，它会导致简单的闭式表达式，而在许多其他情况下，可以找到紧边界。
+
+
+\begin{definition}
+    (传输容量)\quad 对于一个强度为$\lambda$的泊松双极网络，在原点添加参考接收机，在距离$r$处添加所需发射机，
+    让$p_s(\lambda)$指代：
+    在存在来自双极网络中所有发射机的干扰的情况下，该接收机的成功概率。
+    考虑到一个目标中断概率$\epsilon\in (0,1)$，传输容量$\lambda_{tc}$定义为
+    \begin{equation}
+        \lambda_{\mathrm{tc}}(\in) \triangleq(1-\in) \max \left\{\lambda: p_s(\lambda) \geq 1-\in\right\}
+    \end{equation}
+    
+    因为成功概率$p_s(\lambda)$对于$\lambda$是单调减的，传输容量可以写成
+    \begin{equation}
+        \lambda_{\mathrm{tc}}(\in)=(1-\in) p_s^{-1}(1-\in)
+    \end{equation}
+
+    其中$p_s^{-1}(1-\epsilon)$产生【导致成功概率$1-\epsilon$的】强度$\lambda$。
+\end{definition}
+
+\begin{example}
+    如果所有发射机都使用单位功率，所有链路都受到瑞利衰落影响，并且噪声被忽略，那么求出二维网络的传输容量。
+\end{example}
+
+\begin{solution}
+    从式子(5.14)，我们知道
+    \begin{equation}
+        p_s(\lambda)=\exp \left(-\pi \lambda \theta^\delta r^2 \Gamma(1+\delta) \Gamma(1-\delta)\right)
+    \end{equation}
+
+    其中$\delta=2/\alpha$.定义$\gamma \triangleq \pi \theta^\delta r^2 \Gamma(1+\delta) \Gamma(1-\delta)$，
+    通过inverting $p_s(\lambda)$，我们得到
+    \begin{equation}
+        \lambda_{\mathrm{tc}}(\epsilon)=-\frac{1}{\gamma}(1-\epsilon) \log (1-\epsilon)
+    \end{equation}
+
+    因为$\epsilon$经常是非常小的，我们可能使用对数函数的Taylor展开，来得到
+    \begin{equation}
+        \begin{aligned}
+            \lambda_{\mathrm{tc}}(\epsilon) &=\frac{\epsilon-\epsilon^2 / 2}{\gamma}+O\left(\epsilon^3\right) \\
+            &=\frac{\epsilon}{\gamma}+O\left(\epsilon^2\right),
+            \end{aligned}
+    \end{equation}
+
+    这给出了$\epsilon\rightarrow 0$时的上界。
+\end{solution}
+
+上面solution中定义的参数$\gamma$被Haenggi(2009)称为空间竞争参数spatial contention parameter.
+它通常被定义为作为发射器强度$\lambda$函数的成功概率$p_s(\lambda)$在$\lambda=0$位置的（负）斜率
+\begin{equation}
+    \gamma \triangleq-\left.\frac{\mathrm{d} p_{\mathrm{s}}(\lambda)}{\mathrm{d} \lambda}\right|_{\lambda=0}
+\end{equation}
+
+这个参数描述了：随着越来越多的链路加载在网络中，成功概率下降得有多快。
+所以，一般来说，传输容量的渐进行为，是
+\begin{equation}
+    \lambda_{t c}(\epsilon) \sim \frac{\epsilon}{\gamma}, \quad \epsilon \rightarrow 0
+\end{equation}
+
+对于大$\epsilon$，传输容量并不是随着$\epsilon$单调增的，这是由于因子$1-\epsilon$的存在；
+它在$\epsilon=1-1-/e$的时候达到最大值$1/(e\gamma)$.
+
+作为链路距离$r$的一个函数，很明显看到$\lambda_{\mathrm{tc}} \propto r^{-2}$，
+这表明一个事实：
+如果遵循中断限制，在$r$距离上传输，需要和$r^2$成比例的面积。
+
+
+
+
+\subsection{具有衰落的网络}
+对于独立瑞利衰落的case，我们发现Example 5.2的闭形式的传输容量。
+对于一般的衰落，我们通过再一次聚焦在一个主导的干扰器上，取得了一个界。
+在这个case中，
+\begin{equation}
+    \Phi_{\text {dom }}=\left\{x \in \Phi: h r^{-\alpha} / h_x\|x\|^{-\alpha}<\theta\right\}
+\end{equation}
+
+其中，$h$是关心的链路的衰落系数，$h_x$是干扰器$x$的衰落系数。
+正如2.9.2节推导的那样，有衰落的路径损失过程$\Xi $的强度函数是：
+\begin{equation}
+    \mu(x)=\lambda \pi \delta x^{\delta-1} \mathbb{E}\left(h^\delta\right) .
+\end{equation}
+
+
+因此，给定$h$，缺少任意主导干扰器的概率是【$\Xi$中没有点和原点距离在$r^\alpha \theta /h$】的概率。
+即
+\begin{equation}
+    \mathbb{P}\left(\Phi_{\text {dom }}=\emptyset \mid h\right)=\exp \left(-\int_0^{r^\alpha \theta / h} \mu(x) \mathrm{d} x\right)=\exp \left(-\lambda \pi \mathbb{E}\left(h^\delta\right) r^2 \theta^\delta h^{-\delta}\right)
+\end{equation}
+
+因此，
+\begin{equation}
+    p_s(\lambda)<\mathbb{E}_h\left(\exp \left(-\lambda \pi \mathbb{E}\left(h^\delta\right) r^2 \theta^\delta h^{-\delta}\right)\right)
+\end{equation}
+
+应用如下形式的Jensen不等式：
+\begin{equation}
+    \mathbb{E}_h\left(\exp \left(-\lambda \pi \mathbb{E}\left(h^\delta\right) r^2 \theta^\delta h^{-\delta}\right)\right)>\exp \left(-\lambda \pi \mathbb{E}\left(h^\delta\right) r^2 \theta^\delta \mathbb{E}\left(h^{-\delta}\right)\right)
+\end{equation}
+
+并不产生想要的上界，因为不等式的方向错了。但是这表明，近似的，有
+\begin{equation}
+    p_s(\lambda) \approx \exp \left(-\lambda \pi r^2 \theta^\delta \mathbb{E}\left(h^\delta\right) \mathbb{E}\left(h^{-\delta}\right)\right)
+\end{equation}
+
+结果是，
+\begin{equation}
+    \lambda_{\mathrm{tc}}(\epsilon) \approx \frac{-(1-\epsilon) \log (1-\epsilon)}{\pi r^2 \theta^\delta \mathbb{E}\left(h^\delta\right) \mathbb{E}\left(h^{-\delta}\right)} \sim \frac{\epsilon}{\pi r^2 \theta^\delta \mathbb{E}\left(h^\delta\right) \mathbb{E}\left(h^{-\delta}\right)}
+\end{equation}
+
+强度，这是精确的表达式，对于瑞利衰落来说，即，在这种情况下，使用主导干扰的成功概率上限和使用Jensen不等式的成功概率下限的效果精确地相互抵消。
+
+因为$E(h^\delta)\mathbb{E}(h^{-\delta})>1$(除了没有衰落的case)，
+衰落似乎对传输容量具有负面影响。
+
+
+\section{干扰的时间相关性}
+到目前为止，我们对干扰做特征化，仅仅是在平面上的单个位置，
+没有考虑时间这一要素。虽然干扰的分布不取决于平稳点过程中的位置，
+但在两个附近位置测量的干扰是相关的，
+因为它们取决于同一点过程，因此受到共同随机性的影响。
+所以，干扰是空间相关的。这在Fig. 5.4进行了展示，展现了
+ALOHA传输概率为$p=1/3$的泊松网络中的干扰场的3个快照。
+
+以及，在一个静态网络中，信道接入或者MAC制式选择一变化的顶点子集作为发射机。
+例如，在时隙$k$,$\Phi_k\subset \Phi$是发射机的集合，让$I_k$表示原点处在时刻$k$测量到的干扰。
+那么$I_k$和$I_j$是相关的，同样是由于共同的随机性$\Phi$。
+因此在干扰场中也有时间相关性。
+
+这两种类型的相关性（空间相关性和时间相关性）都值得探索，
+因为它们影响了多跳通信和基于重复的传输方案的联合成功概率，
+其中发射机重新发送未接收的消息。
+
+我们关注在$\mathbb{R}^2$上由强度$\lambda$的潜在发射机的PPP引起的干扰场，
+这些发射机采用ALOHA作为MAC方案。
+路径损耗定律$\ell(x)$ 假定具有以下性质。
+\begin{itemize}
+    \item 它仅仅依赖$\| x \|$.
+    \item 它随着$\| x \|$增加而单调减.
+    \item 它是可积的，即，$\int_{\mathbb{R}^2} \ell(x) \mathrm{d} x<\infty$
+\end{itemize}
+
+例如，一个有效的路径损失模型是
+\begin{equation}
+    \ell_\epsilon(x)=\frac{1}{\epsilon+\|x\|^\alpha}, \epsilon \in(0, \infty), \alpha>2
+\end{equation}
+
+标准奇异路径损失模型$\ell(x)=\| x \|^{-\alpha}$可以由上式取极限$\lim _{\epsilon \rightarrow 0} \ell_\epsilon(x)$得到。
+因为是在ALOHA中，每一个节点在每一个时隙进行一个独立决策来发送，
+在一个时隙发射机的集合是原始PPP$\Phi$的thinned版本，
+导致在时隙$k$的得到的发射机过程$\Phi_k$，也是一个PPP。
+这很容易通过考虑void概率来进行验证。
+对于一个有界的集合$B\subset \mathbb{R}^2$，我们有
+\begin{equation}
+    \begin{aligned}
+        \mathbb{P}\left(\Phi_k(B)=0\right) &=\mathbb{E} \prod_{x \in \Phi \cap B} 1(x \text { not a transmitter at time } k) \\
+        & \stackrel{(\mathrm{a})}{=} \prod_{x \in \Phi \cap B} \mathbb{P}(x \text { not a transmitter at time } k) \\
+        &=\mathbb{E}\left[(1-p)^{\Phi(B)}\right] \\
+        & \stackrel{(b)}{=} \exp (-\lambda p|B|)
+        \end{aligned}
+\end{equation}
+
+这里(a)是因为：节点彼此独立地决定是否传输，由于$\Phi$是PPP，
+$\Phi(B)$是均值为$\lambda |B|$的泊松随机变量；
+这里(b)是因为：泊松随机变量的MGF矩生成函数。
+
+从上面我们可以看到，发射机在时刻$k$处理的void probability是$\exp(-p\lambda |B|)$，
+其对应于PPP。我们还观察到$\Phi_k$具有密度$p\lambda$，这是直观的。
+在时刻$k$在位置$z$的干扰是：
+\begin{equation}
+    I_k(z)=\sum_{x \in \Phi} 1\left(x \in \Phi_k\right) h_{x z}(k) \ell(x-z)
+\end{equation}
+
+其中，$h_{xz}$是位置$x$和位置$z$之间的衰落，此衰落被假定时间上和空间上都是独立的。
+
+针对具有传输概率$p$的ALOHA，我们的目标是计算随机变量$I_k(u),I_l(v)$的相关系数\\
+
+
+
+
+
+
+
+\begin{remark}
+    对于ALOHA，一个有限的collection或者向量$\mathrm{v}=\left(I_{k_1}(z), I_{k_2}(z)\right.  \left.\ldots, I_{k_n}(z)\right) \text { with } n \in \mathbb{N}, k_1 \neq k_2 \neq \ldots \neq k_n, z \in \mathbb{R}^2$
+    ，是可交换的，或者对称性依赖的，因为$v$的联合分布并不随着它的成分做permutation而改变。
+    可交换性的使用在Kingman(1978)中被研究。
+\end{remark}
+
+
+为了计算随机变量的联合矩，我们使用联合拉普拉斯变换，作用于随机变量$I_k(u)$和$I_l(v)$
+
+\begin{theorem}
+    (干扰的联合拉普拉斯变换) \quad $I_k(u),I_l(v),k\neq l$的联合拉普拉斯变换，是
+    \begin{equation}
+        \mathcal{L}\left(s_1, s_2\right)=\exp \left(-\lambda \int_{\mathbb{R}^2}\left[1-\xi\left(s_1, u-x\right) \xi\left(s_2, v-x\right)\right] \mathrm{d} x\right)
+    \end{equation}
+    
+    其中
+    \begin{equation}
+        \xi(s, x)=1-p+p \mathcal{L}_h(s \ell(x))
+    \end{equation}
+
+    $\mathcal{L}_h$表示对衰落分布做拉普拉斯变换
+\end{theorem}
+
+\begin{proof}
+    在时刻$k$位置$u\in \mathbb{R}^2$的干扰是
+    \begin{equation}
+        I_k(u)=\sum_{x \in \Phi_k} h_{x u}(k) \ell(x-u) .
+    \end{equation}
+
+    在时刻$l$位置$v\in \mathbb{R}^2$的干扰是
+    \begin{equation}
+        I_l(v)=\sum_{y \in \Phi_l} h_{y v}(l) \ell(y-v) .
+    \end{equation}
+
+    所以，联合拉普拉斯变换是
+    \begin{equation}
+        \mathcal{L}\left(s_1, s_2\right)=\mathbb{E} \exp \left[-s_1 \sum_{x \in \Phi_k} h_{x u}(k) \ell(x-u)-s_2 \sum_{y \in \Phi_l} h_{y v}(l) \ell(y-v)\right] .
+    \end{equation}
+
+    将上式重写为乘积的形式
+    \begin{equation}
+        \begin{aligned}
+            &\mathcal{L}\left(s_1, s_2\right) \\
+            &\quad=\mathbb{E} \prod \exp \left(-s_1 1\left(x \in \Phi_k\right) h_{x u}(k) \ell(x-u)\right) \exp \left(-s_2 1\left(x \in \Phi_l\right) h_{x v}(l) \ell(x-v)\right)
+            \end{aligned}
+    \end{equation}
+
+    因为在ALOHA中，每一个节点都是独立决策是否发送，考虑ALOHA情形，上式变为
+    \begin{equation}
+        \begin{aligned}
+            &\mathcal{L}\left(s_1, s_2\right) \\
+            &\quad=\mathbb{E} \prod_{x \in \Phi}\left[1-p+p \exp \left(-s_1 h_{x u}(k) \ell(x-u)\right)\right]\left[1-p+p \exp \left(-s_2 h_{x v}(l) \ell(x-v)\right)\right]
+            \end{aligned}
+    \end{equation}
+
+    因为衰落被假定是空间时间独立的，考虑到这一点，上式变为
+    \begin{equation}
+        \begin{aligned}
+            \mathcal{L}\left(s_1, s_2\right) &=\mathbb{E} \prod_{x \in \Phi}\left[1-p+p \mathcal{L}_h\left(s_1 \ell(x-u)\right)\right]\left[1-p+p \mathcal{L}_h\left(s_2 \ell(x-v)\right)\right] \\
+            &=\mathbb{E} \prod_{x \in \Phi} \xi\left(s_1, x-u\right) \xi\left(s_2, x-v\right) \\
+            &=\exp \left(-\lambda \int_{\mathbb{R}^2}\left[1-\xi\left(s_1, x-u\right) \xi\left(s_2, x-v\right)\right] \mathrm{d} x\right) .
+            \end{aligned}
+    \end{equation}
+
+    最后一步是使用PPP的pgfl。
+\end{proof}
+
+使用上面定理中相似的方法，相同时间$k$，不同位置$u,v$，随机变量$I_k(u),I_k(v)$的联合拉普拉斯变换
+是
+\begin{equation}
+    \mathcal{L}_{I(u) I(v)}\left(s_1, s_2\right)=\exp \left(-\lambda \int_{\mathbb{R}^2}\left[1-\mathcal{L}_h\left(s_1 \ell(x-u)\right) \mathcal{L}_h\left(s_2 \ell(x-v)\right)\right] \mathrm{d} x\right)
+\end{equation}
+
+要计算$I_k(u)$和$I_l(v)$的乘积的均值，需要计算相关系数
+\begin{equation}
+    \begin{aligned}
+        \mathbb{E}\left[I_k(u) I_l(v)\right] &=\left.\frac{\partial^2}{\partial s_2 \partial s_1} \mathcal{L}\left(s_1, s_2\right)\right|_{\left(s_1, s_2\right)=(0,0)} \\
+        &=p^2 \lambda \int_{\mathbb{R}^2} \ell(x-u) \ell(x-v) \mathrm{d} x+\lambda^2 p^2\left(\int_{\mathbb{R}^2} \ell(x) \mathrm{d} x\right)^2 .
+        \end{aligned}
+\end{equation}
+
+\begin{lemma}
+    ALOHA情形，路径损失函数取式子(5.17)，干扰$I_k(u)$和干扰$I_l(v)$的空时相关系数是
+    \begin{equation}
+        \zeta(u, v)=\frac{p \int_{\mathbb{R}^2} \ell(x) \ell(x-\|u-v\|) \mathrm{d} x}{\mathbb{E}\left(h^2\right) \int_{\mathbb{R}^2} \ell^2(x) \mathrm{d} x} .
+    \end{equation}
+\end{lemma}
+
+\begin{proof}
+    因为$I_k(u)$和$I_k(v)$是独立分布的，我们有
+    \begin{equation}
+        \zeta(u, v)=\frac{\mathbb{E}\left[I_k(u) I_l(v)\right]-\mathbb{E}\left[I_k(u)\right]^2}{\mathbb{E}\left[I_k(u)^2\right]-\mathbb{E}\left[I_k(u)\right]^2}
+    \end{equation}
+
+    使用上面的定量关系替换，我们有
+    \begin{equation}
+        \begin{aligned}
+            \zeta(u, v) &=\frac{p \int_{\mathbb{R}^2} \ell(x-u) \ell(x-v) \mathrm{d} x}{\mathbb{E}\left[h^2\right] \int_{\mathbb{R}^2} \ell^2(x) \mathrm{d} x} \\
+            & \stackrel{\text { (a) }}{=} \frac{p \int_{\mathbb{R}^2} \ell(x) \ell(x-\|u-v\|) \mathrm{d} x}{\mathbb{E}\left[h^2\right] \int_{\mathbb{R}^2} \ell^2(x) \mathrm{d} x},
+            \end{aligned}
+    \end{equation}
+
+    其中(a)是因为替换$y=x-u$以及$\ell(x)$仅仅依赖$\| x \|$
+
+    
+\end{proof}
+
+我们观察到相关系数并不依赖于时刻$k$和时刻$l$，从式子(5.20)我们得到了如下关于空间相关性的lemma。
+
+\begin{lemma}
+    干扰的空间相关系数，即，$I_k(u),I_l(v)$的相关系数，是
+    \begin{equation}
+        \zeta_{\mathrm{s}}(u, v)=\frac{\int_{\mathbb{R}^2} \ell(x) \ell(x-\|u-v\|) \mathrm{d} x}{\mathbb{E}\left[h^2\right] \int_{\mathbb{R}^2} \ell^2(x) \mathrm{d} x} .
+    \end{equation}
+\end{lemma}
+
+通过在lemma 5.11中设置$\| u-v \|=0$，我们得到了时间相关系数。
+
+\begin{lemma}
+    对于ALOHA，时间相关系数，是
+    \begin{equation}
+        \zeta_{\mathrm{t}}=\frac{p}{\mathbb{E}\left(h^2\right)}
+    \end{equation}
+
+    和$\ell(x)$独立。当衰落是Nakagami-m，相关系数是$\zeta_{\mathrm{t}}=pm/(m+1)$.
+    尤其是，对于$m=1$（瑞利衰落），时间相关系数是$p/2$，对于$m\rightarrow \infty$（无衰落），
+    时间相关系数是$p$
+\end{lemma}
+
+因此相关系数随着$m$增加而增加，即，衰落可以减小相关系数，这是符合我们直觉的。注意到
+上面的推导$\int_{\mathbb{R}^2} \ell^2(x) \mathrm{d} x$对于$\ell(x)=\|x\|^{-\alpha}$没有很好的定义。
+我们可以使用这样的路径损耗来替代：$\epsilon\rightarrow 0,\ell_{\epsilon}(x)$
+
+
+\section{中断概率的时间相关性}
+我们使用和之前小节的同样的设置，额外地，我们假设
+在原点的发射机具备一个目的地$z\in \mathbb{R}^2$。
+让$A_k$表示原点可以在时刻$k$连接到目的地$z$的事件。
+即，
+\begin{equation}
+    \mathrm{SIR}=\frac{h_{o z}(k) l(z)}{I_k(z)}>\theta .
+\end{equation}
+
+我们假设所有的链路都服从瑞利衰落。我们想要找到
+$\mathrm{P}\left(A_k, A_l\right), k \neq l$(这表明两个不同时隙中成功概率的相关性)
+成功的联合概率。
+推导是基于【一个pgfl的一个良好的应用】进行的。
+让$\theta_z=\theta/\ell(z)$，我们有
+\begin{equation}
+    \begin{aligned}
+        \mathbb{P}\left(A_k, A_l\right) &=\mathbb{P}\left(h_{o z}(k)>\theta_z I_k(z), h_{o z}(l)>\theta_z I_l(z)\right) \\
+        & \stackrel{(\mathrm{a})}{=} \mathbb{E}\left[\exp \left(-\theta_z I_k(z)\right) \exp \left(-\theta_z I_l(z)\right)\right] \\
+        &=\mathbb{E}\left[\exp \left(-\theta_z \sum_{x \in \Phi} l(x)\left[1\left(x \in \Phi_k\right) h_{x z}(k)+1\left(x \in \Phi_l\right) h_{x z}(l)\right]\right)\right] \\
+        & \stackrel{(\mathrm{b})}{=} \mathbb{E}\left[\prod_{x \in \Phi}\left(\frac{p}{1+\theta_z \ell(x)}+1-p\right)^2\right] \\
+        & \stackrel{(\mathrm{c})}{=} \exp \left(-\lambda \int_{\mathbb{R}^2} 1-\left(\frac{p}{1+\theta_z \ell(x)}+1-p\right)^2 \mathrm{~d} x\right) .
+        \end{aligned}
+\end{equation}
+
+其中(a)是因为$h_{oz}(k),h_{oz}(l),k\neq l$的独立性；
+(b)是因为考虑$h_{xz}(k),h_{xz}(l)$和ALOHA后取的平均；
+(c)是因为PPP的pgfl。
+根据联合概率，条件概率（假设之前的传输成功或失败）可被得到。
+
+\section*{供拓展阅读的参考书目}
+随机几何在无线网络分析中的应用始于Musa\&
+Wasylkiwskyj（1978）和Takagi\&Kleinrock（1984）
+Sousa和Silvester（1990）、Sousa（1990）和Sousa等人的PPP中的干扰特征，
+和Ilow\&Hatzinakos（1998）。Mathar中考虑了格点和购买力平价\&
+Mattfeldt（1995）和Haenggi（2009）。二项式点过程中的干扰
+在Srinivasa和Haenggi（2010）中进行了分析。
+
+瑞利衰落中，干扰的拉普拉斯变换和成功概率的联系，第一次由Linnartz (1992) and Zorzi
+\& Pupolin (1995)给出。
+这个结果被Baccelli et al. (2006)推广，Baccelli 他们也给出了干扰和中断对路由的影响的结果。
+
+Baccelli \& Blaszczyszyn (2009) 的两卷书，
+卷1中对随机几何给出了介绍，卷2中介绍了MAC设计自组网中路由的详细介绍。
+
+Haenggi\&Gant（2008）的专著中详细讨论了作为点过程建模的无线网络中的干扰以及由此产生的中断概率，
+该专著也包含了泊松模型之外的扩展。
+
+传输容量在Weber等人（2005年）中介绍，是Weber\&Andrews（2012年）专著的主题，Ganti\&Haenggi（2009年b）分析了干扰相关性。
+
+关于稳定分布的细节可以在Samorodnitsky \& Taqqu (1994)找到。
+
+
+
+\section*{练习题}
+\begin{exercise}
+    让$\Phi$是一个均匀PPP，让$I_r$表示在原点$o$处测得的干扰，   
+    此干扰源自干扰器$\Phi \cap b(o, r)$，证明如果路径损耗律是
+    $\bar{\ell}(r)=r^{-3}$，那么
+    \begin{equation}
+        \mathbb{E}\left(I_{2 r}-I_r\right)=\mathbb{E}\left(I_{\infty}-I_{2 r}\right), \quad \forall r>0
+    \end{equation}
+\end{exercise}
+
+
+\begin{exercise}
+    让路径损失函数是$\ell(x)=\min \left\{\|x\|^{-\alpha}, 1\right\}$，
+    让$\Phi$是$\mathbb{R}^2$上一个强度为$\lambda$的稳定的PPP。干扰是
+    \begin{equation}
+        I=\sum_{x \in \Phi} h_x \ell(x)
+    \end{equation}
+    对于 iid.的$h_x$有分布函数$F_h$。
+    
+    确定$\operatorname{var}(I)$和$\mathbb{E}(I^2)$对于
+    $F_h(x)=\mathbf{1}\{x \geq 1\}$以及$F_h(x)=1-\exp (-x)$.
+    这里的$\alpha$要满足什么条件才能使方差是有限的？
+
+    使用涉及1st moment和2nd moment的不等式，你可以对$I$的分布给出什么结论？
+\end{exercise}
+
+
+
+\begin{exercise}
+    考虑平面上强度为独立的PPP。考虑路径损耗律
+    为$\ell(x)=\|x \|^{-4}$的情形，将来自原点$o$的四个PPP的干扰
+    记为$I,I_1,I_2,I_3$。找到常数$c$使满足
+    \begin{equation}
+        I_1+I_2+I_3 \stackrel{\mathrm{d}}{=} \mathrm{cI} .
+    \end{equation}
+    试着从$3$的情形向$n$的情形做推广。
+\end{exercise}
+
+
+\begin{exercise}
+    设置一个模拟，以验证$\lambda=1$的前一个问题，
+    对于相同的路径损耗函数但没有衰落。
+    绘制$\alpha \in\{2.1,2.2, \ldots, 5.0\}$
+    情形下的平均值和方差，理论曲线也要包括？
+    在这个过程中你遇到了什么困难？
+\end{exercise}
+
+
+\begin{exercise}
+    理论分析计算吞吐量。考虑一个密度为$\lambda$的PPP$\Phi\subset \mathbb{R}^2$。
+    假设瑞利衰落，概率为p的时隙ALOHA作为信道接入协议。
+    定义吞吐量是
+    \begin{equation}
+        T=p(1-p)p_s(p)
+    \end{equation}
+    
+    其中$p_s(p)$是距离r上传输的成功概率，当
+    仅考虑干扰：
+    \begin{equation}
+        p_s=\mathbb{P}(\text{SIR}>\theta)
+    \end{equation}
+    
+    为什么这是一个有意义的吞吐指标？
+    
+    找到最优的$\theta,\alpha,r$的函数形式的传输概率，
+    以及得到的$p_s,T$
+    
+    如果无线电具有全双工能力，吞吐量定义将如何改变？
+    
+    导出相应的最佳p并进行比较。
+    
+    绘制$r=1,\lambda=1,\theta=1,\alpha=4$情形的吞吐$T$-概率$p$
+    函数，半双工和全双工的情形都要给出。
+
+\end{exercise}
+
+
+\begin{exercise}
+    模拟来计算吞吐量。对相同的场景写一个模拟，其中
+    $r=1,\lambda=1,\theta=1,\alpha=4$。绘制模拟得到的吞吐$T$-概率$p$曲线，
+    和理论分析的结果进行比较。
+\end{exercise}
+
+
+\begin{exercise}
+    再一次对于相同的场景，假定干扰器并不会衰落（但是来自关心的发射机的信道会）
+    你期待成功概率会怎么改变？使用模拟仿真来进行验证。
+\end{exercise}
+
+
+\begin{exercise}
+    对于泊松网络，瑞利衰落，ALOHA，Lemma 5.13已经表示干扰的
+    时间相关和传输概率$p$成比例。利用Section 5.1.5的方法推导同样的结果：
+    首先考虑一个有限的网络，并以节点的数量为条件，然后对节点的（泊松）数量解除条件，让网络面积增长到
+    无穷。
+    从一个有限的$\epsilon$开始，让$\epsilon\rightarrow 0$，观察路径损失函数$\ell_\epsilon$的
+    表现。
+\end{exercise}
+
+
+\begin{exercise}
+    对于Section 5.6考虑的成功概率的时间相关，证明如下结论：
+    \begin{equation}
+        \frac{\mathbb{P}\left(A_k \mid A_l\right)}{\mathbb{P}\left(A_k\right)}>1
+    \end{equation}
+    这表明成功事件是正相关的。
+\end{exercise}
+
+
+
+

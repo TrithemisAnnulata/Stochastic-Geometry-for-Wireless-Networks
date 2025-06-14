@@ -1,0 +1,57 @@
+\chapter{点过程上的和与积}
+
+\section{引言}
+\subsection{动机}
+\subsection{记号}
+
+
+
+
+
+\section*{练习题}
+\begin{exercise}
+    使用显式的计算矩生成函数的导数的方法，完成引理4.8的证明。
+\end{exercise}
+
+\begin{exercise}
+    让$v(x)=\min \left\{1, \frac{1}{2}\|x\|^2\right\}$,
+    从例子2.1中确定die process的the pgfl $G[v]$
+\end{exercise}
+
+
+\begin{exercise}
+    比较$\mathbb{E}e^{-s[f]}$和$\exp (-\mathbb{E}S[f])$
+\end{exercise}
+
+\begin{exercise}
+    展示泊松hole过程的pgfl。
+    例子3.7中介绍的那个possion hole process,
+    参数是$\lambda_1,\lambda_2,r$
+    \begin{equation*}
+        G[v]=\mathrm{E}\left[\exp \left(-\lambda_2 \int_{\mathrm{R}^2 \backslash \Xi_r}(1-v(x)) \mathrm{d} x\right)\right] .
+    \end{equation*}
+
+    如果$v=1-\mathbf{1}_B(x), \lambda_1=1, \text { and } r=1$,
+    确定$G[v]$。
+
+    这产生了void probability.
+\end{exercise}
+
+
+
+\begin{exercise}
+    隐私图的定义如下。
+\end{exercise}
+
+
+\begin{exercise}
+    让$\Phi$是一个泊松高斯过程，其中representative cluster是
+    $\Phi_0=\{ o \}$ with probability $1-p$,$\Phi_0=\{ o,x \}$ with probability $p$.
+    其中$x$以密度$f$分布。
+    假定我们选择的密度正好可以让$\mathbb{P}(x=o)=0$。展示pgfl是
+    \begin{equation*}
+        G[v]=\exp \left(\lambda_{\mathrm{p}} \int_{\mathbf{R}^d}\left((1-p) v(x)+p v(x) \int_{\mathbf{R}^d} v(x+y) f(y) \mathrm{d} y-1\right) \mathrm{d} x\right) .
+    \end{equation*}
+
+    所以$v \in v$  意味着 $1-v(x)$在有界集外消失。
+\end{exercise}
